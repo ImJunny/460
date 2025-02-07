@@ -17,6 +17,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+// function used by getThreeIntegers to validate single integer, updates single integer
 void validateInteger(int* num){
   scanf("%d", num);
   while (*num <= 0) {
@@ -25,6 +26,7 @@ void validateInteger(int* num){
   }
 }
 
+// function to get three integers, using variables as reference
 void getThreeIntegers(int* a, int* b, int* c){
   printf("First integer: ");
   validateInteger(a);
@@ -34,12 +36,14 @@ void getThreeIntegers(int* a, int* b, int* c){
   validateInteger(c);
 }
 
+// function get validate triple, returns boolean value
 bool validateTriple(int a, int b, int c){
   if ((a*a + b*b == c*c) || (a*a + c*c == b*b) || (b*b + c*c == a*a)) return true;
   return false;
 }
 
-void getArea(int a, int b, int c){
+// function to calculate area, returns area
+int getArea(int a, int b, int c){
     int first, second;
     if (a*a + b*b == c*c){
         first = a;
@@ -51,13 +55,15 @@ void getArea(int a, int b, int c){
         first = b;
         second = c;
     }
-    printf("The area of the right triangle they form is %d.\n", first*second/2);
+    return first*second/2;
 }
 
+// function to print separator used for readability in output/terminal
 void printSeparator(){
     printf("\n**********************************************\n");
 }
 
+// main function
 int main() {
   char choice;
   printSeparator();
@@ -74,7 +80,8 @@ int main() {
     bool isTriple = validateTriple(x, y, z);
     if (isTriple){
       printf("The integers ARE a Pythagorean Triple.\n");
-      getArea(x, y, z);
+      float area = getArea(x, y, z);
+      printf("The area of the right triangle they form is %f.\n", area);
     }else{
       printf("The integers are NOT a Pythagorean Triple.\n");
     }

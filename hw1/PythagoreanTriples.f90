@@ -21,6 +21,7 @@ program main
   integer :: x, y, z
   logical :: isTriple = .false.
   CHARACTER :: choice
+  real :: area
 
   call printSeparator()
   write(*, '(A)') "The purpose of this program is to determine if 3 positive "//&
@@ -38,7 +39,9 @@ program main
     call validateTriple(x, y, z, isTriple)
     if (isTriple .eqv. .true.) then
       write(*, '(A)') "The integers ARE a Pythagorean Triple."
-      call getArea(x, y, z)
+      write(*, '(A)') "The integers ARE a Pythagorean Triple."
+      call getArea(x, y, z, area)
+      write(*,*) "The area of the right triangle they form is ", area, " square units."   
     else
       write(*, '(A)') "The integers are NOT a Pythagorean Triple."
     end if
@@ -101,12 +104,12 @@ program main
       end subroutine validateTriple  
 
     ! subroutine to calculate area of relevant integers in Pythagorean Triple;
-    ! does not return anything.
-      subroutine getArea(a, b, c)
+    ! 'returns' value of area.
+      subroutine getArea(a, b, c, area)
         implicit none
         integer, intent(in) :: a, b, c
         integer :: first, second
-        REAL :: area
+        real, intent(out) :: area
         if (a**2 + b**2 == c**2) then
           first = a
           second = b
@@ -118,7 +121,6 @@ program main
           second = c
         end if
 
-        area = first * second
-        write(*,*) "The area of the right triangle they form is ", area, " square units."      
+        area = first*second/2   
       end subroutine getArea
 end program main  
